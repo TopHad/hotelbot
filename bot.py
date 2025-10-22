@@ -1,32 +1,11 @@
 import os
-from typing import Dict, List
-
 from telebot import TeleBot, types
-try:
-    from telebot.apihelper import ApiTelegramException  # type: ignore
-except Exception:
-    ApiTelegramException = Exception  # fallback type
 
-# Load .env file manually if it exists
-def load_env_file():
-    try:
-        with open('.env', 'r', encoding='utf-8-sig') as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#') and '=' in line:
-                    key, value = line.split('=', 1)
-                    os.environ[key] = value
-    except (FileNotFoundError, UnicodeDecodeError):
-        pass
-
-load_env_file()
-
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "PASTE_YOUR_TOKEN_HERE")
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "")  # e.g. my_hotel_admin (without @)
-
-# Bot token and admin username loaded from .env file
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "")  # e.g. my_hotel_admin (без @)
 
 bot = TeleBot(TELEGRAM_BOT_TOKEN, parse_mode="HTML")
+
 
 
 # In-memory per-chat storage of message IDs that should be deleted on "Назад"
@@ -359,5 +338,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
