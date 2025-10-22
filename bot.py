@@ -127,7 +127,6 @@ SECTION_STICKERS = {
 
 def build_main_inline_keyboard() -> types.InlineKeyboardMarkup:
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-    # Create inline buttons with callback_data keys and emojis
     keyboard.add(
         types.InlineKeyboardButton("📍 Расположение отеля", callback_data="menu:location"),
         types.InlineKeyboardButton("🍳 Время завтрака", callback_data="menu:breakfast"),
@@ -138,9 +137,15 @@ def build_main_inline_keyboard() -> types.InlineKeyboardMarkup:
         types.InlineKeyboardButton("🧹 Ежедневная уборка", callback_data="menu:cleaning"),
         types.InlineKeyboardButton("🚗 Заказ трансфера", callback_data="menu:transfer"),
         types.InlineKeyboardButton("📞 Контакты", callback_data="menu:contacts"),
-        types.InlineKeyboardButton("👨‍💼 Написать администратору", callback_data="menu:admin"),
+    )
+    # 👉 кнопка со ссылкой на WhatsApp
+    keyboard.add(
+        types.InlineKeyboardButton(
+            "👨‍💼 Написать администратору", url="https://wa.me/79194425233"
+        )
     )
     return keyboard
+
 
 
 def build_back_inline_keyboard() -> types.InlineKeyboardMarkup:
